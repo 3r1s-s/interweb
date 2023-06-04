@@ -1,12 +1,5 @@
 class ScratchifyExtension {
-    constructor (runtime, extensionId) {
-		this.icon = '';
-    	this.menuicon = '';
-		this.runtime = runtime;
-		this.end_hat = 0;
-		this.audio_player = new Audio();
-		this.set_volume = 1;
-		this.version_number = '1.2.2';
+    constructor () {
     }
     getInfo() {
         return {
@@ -66,15 +59,5 @@ class ScratchifyExtension {
         }
     }
 }
-(function() {
-    var extensionClass = ScratchifyExtension;
-    if (typeof window === "undefined" || !window.vm) {
-        Scratch.extensions.register(new extensionClass());
-		console.log("Sandboxed mode detected, performance will suffer because of the extension being sandboxed.");
-    } else {
-        var extensionInstance = new extensionClass(window.vm.extensionManager.runtime);
-        var serviceName = window.vm.extensionManager._registerInternalExtension(extensionInstance);
-        window.vm.extensionManager._loadedExtensions.set(extensionInstance.getInfo().id, serviceName);
-		console.log("Unsandboxed mode detected. Good.");
-    };
-})()
+
+Scratch.extensions.register(new ScratchFetch())
